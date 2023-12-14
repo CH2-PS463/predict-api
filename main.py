@@ -17,12 +17,6 @@ def req(y_true, y_pred):
     tf.keras.backend.get_session().run(tf.local_variables_initializer())
     return req
 
-
-# model_filename = 'my_model_fix.h5'
-# model_bucket = storage_client.get_bucket('sa-lindungi-model-bucket')
-# model_blob = model_bucket.blob(model_filename)
-# model_blob.download_to_filename(model_filename)
-# model = load_model(model_filename, custom_objects={'req': req})
 model = load_model('trained_model.h5', custom_objects={'req': req})
 
 
