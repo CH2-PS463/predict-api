@@ -6,6 +6,7 @@ from flask import Flask, request, jsonify
 import streamlit as st
 import numpy as np
 
+#connection to gcp
 app = Flask(__name__)
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'capstone-satriasayur.json'
 storage_client = storage.Client()
@@ -22,6 +23,7 @@ def model_prediction(test_image):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
+        #cek if bucket is ready
         try:
             image_bucket = storage_client.get_bucket(
                 'satriasayur-bucket')
@@ -42,6 +44,7 @@ def index():
             label.append(i[:-1])
         st.success("Model is Predicting it's a {}".format(label[result_index]))
 
+        #output model
         result = {
             "nama": format(label[result_index]),
         }
