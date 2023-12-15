@@ -33,14 +33,12 @@ def index():
             respond.status_code = 400
             return respond
 
-        img = tf.keras.utils.load_img(img_path, target_size=(64, 64))
-        x = tf.keras.utils.img_to_array(img)
-        x = np.expand_dims(x, axis=0)
-        x = preprocess_input(x)
-        images = np.vstack([x])
+        image = tf.keras.preprocessing.image.load_img(img_path ,target_size=(64,64))
+        input_arr = tf.keras.preprocessing.image.img_to_array(image)
+        input_arr = np.array([input_arr]) #convert single image to batch
 
         # model predict
-        pred_vegetables = model.predict(images)
+        pred_vegetables = model.predict(input_arr)
         # find the max prediction of the image
         maxx = pred_vegetables.max()
 
