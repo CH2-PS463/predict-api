@@ -11,7 +11,6 @@ app = Flask(__name__)
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'capstone-satriasayur.json'
 storage_client = storage.Client()
 
-
 def req(y_true, y_pred):
     req = tf.metrics.req(y_true, y_pred)[1]
     tf.keras.backend.get_session().run(tf.local_variables_initializer())
